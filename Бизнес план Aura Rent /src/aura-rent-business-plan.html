@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Rent - Бизнес План</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/recharts@2.5.0/dist/Recharts.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        h1 { font-size: 3rem; font-weight: 800; line-height: 1.2; }
+        h2 { font-size: 2.25rem; font-weight: 700; line-height: 1.3; }
+        h3 { font-size: 1.5rem; font-weight: 600; line-height: 1.4; }
+        h4 { font-size: 1.25rem; font-weight: 600; line-height: 1.4; }
+        p { line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+        const { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } = Recharts;
+
+        // Hero Component
+        function Hero() {
+            return (
+                <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-20 px-6">
+                    <div className="max-w-6xl mx-auto">
+                        <div className="flex items-center gap-3 mb-6 justify-center">
+                            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" /></svg>
+                        </div>
+                        <h1 className="text-center mb-4">Aura Rent</h1>
+                        <p className="text-center text-xl text-blue-100 max-w-3xl mx-auto">
+                            Аренда премиум-техники и оборудования для туристов
+                        </p>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 max-w-4xl mx-auto">
+                            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+                                <div className="text-3xl mb-2">500К ₽</div>
+                                <div className="text-sm text-blue-100">Стартовый капитал</div>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+                                <div className="text-3xl mb-2">4 мес</div>
+                                <div className="text-sm text-blue-100">Окупаемость</div>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+                                <div className="text-3xl mb-2">2.3М ₽</div>
+                                <div className="text-sm text-blue-100">Выручка в год</div>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+                                <div className="text-3xl mb-2">1.5М ₽</div>
+                                <div className="text-sm text-blue-100">Чистая прибыль</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Executive Summary
+        function ExecutiveSummary() {
+            return (
+                <section className="py-16 px-6">
+                    <div className="max-w-6xl mx-auto">
+                        <h2 className="text-center mb-12">Краткое резюме</h2>
+                        
+                        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                            <p className="text-lg leading-relaxed mb-6">
+                                <strong>Aura Rent</strong> — сервис аренды техники и оборудования для туристов: 
+                                GoPro, Ray-Ban Meta, JBL, SUP-борды. Старт в Крыму (Ялта/Севастополь) на 1 год, 
+                                затем масштабирование в Санкт-Петербург.
+                            </p>
+                            
+                            <div className="grid md:grid-cols-3 gap-6 mt-8">
+                                <div className="flex gap-4">
+                                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                    </div>
+                                    <div>
+                                        <div className="text-sm text-slate-600 mb-1">Локация</div>
+                                        <div>Крым (Ялта/Севастополь)</div>
+                                        <div className="text-sm text-slate-500">→ Санкт-Петербург</div>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex gap-4">
+                                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                                    </div>
+                                    <div>
+                                        <div className="text-sm text-slate-600 mb-1">Целевая аудитория</div>
+                                        <div>Туристы</div>
+                                        <div className="text-sm text-slate-500">Пик: май–сентябрь</div>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex gap-4">
+                                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                                    </div>
+                                    <div>
+                                        <div className="text-sm text-slate-600 mb-1">Команда</div>
+                                        <div>Основатель</div>
+                                        <div className="text-sm text-slate-500">Зам. директора, промоутеры</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Market Analysis
+        function MarketAnalysis() {
+            const products = [
+                { name: 'GoPro Hero 12', competitors: '1500–2500 ₽/день', average: '2000 ₽', ourPrice: '1700 ₽', note: 'Доступнее на 15%', status: 'premium' },
+                { name: 'Ray-Ban Meta', competitors: 'Нет конкурентов', average: '—', ourPrice: '800 ₽', note: 'Уникальный продукт', status: 'unique' },
+                { name: 'JBL колонки', competitors: '500–1000 ₽/день', average: '700 ₽', ourPrice: '600 ₽', note: 'Доступнее на 14%', status: 'premium' },
+                { name: 'SUP-борды', competitors: '1000–1500 ₽/день', average: '1200 ₽', ourPrice: '1000 ₽', note: 'Доступнее на 17%', status: 'premium' }
+            ];
+
+            return (
+                <section className="py-16 px-6 bg-white">
+                    <div className="max-w-6xl mx-auto">
+                        <h2 className="text-center mb-12">Анализ рынка и конкурентов</h2>
+                        
+                        <div className="grid md:grid-cols-2 gap-6 mb-12">
+                            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-100">
+                                <h3 className="text-xl mb-4">Преимущества</h3>
+                                <ul className="space-y-2">
+                                    <li className="flex items-start gap-2"><span className="text-blue-600 mt-1">✓</span><span>Уникальный продукт (Ray-Ban Meta)</span></li>
+                                    <li className="flex items-start gap-2"><span className="text-blue-600 mt-1">✓</span><span>Комплексное предложение</span></li>
+                                    <li className="flex items-start gap-2"><span className="text-blue-600 mt-1">✓</span><span>Курьерская доставка</span></li>
+                                    <li className="flex items-start gap-2"><span className="text-blue-600 mt-1">✓</span><span>Онлайн-бронирование</span></li>
+                                    <li className="flex items-start gap-2"><span className="text-blue-600 mt-1">✓</span><span>Страхование</span></li>
+                                    <li className="flex items-start gap-2"><span className="text-blue-600 mt-1">✓</span><span>Партнёрства с отелями и пляжами</span></li>
+                                </ul>
+                            </div>
+                            
+                            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-100">
+                                <h3 className="text-xl mb-4">Позициони��ование</h3>
+                                <div className="space-y-4">
+                                    <div><div className="text-sm text-slate-600 mb-1">Сегмент</div><div className="text-xl">Доступный премиум</div></div>
+                                    <div><div className="text-sm text-slate-600 mb-1">Ценовая политика</div><div className="text-xl">На 10-20% ниже рынка</div></div>
+                                    <div><div className="text-sm text-slate-600 mb-1">УТП</div><div>Доставка + уникальный продукт + доступная цена</div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-slate-50 rounded-xl p-6 overflow-x-auto">
+                            <table className="w-full">
+                                <thead>
+                                    <tr className="border-b border-slate-200">
+                                        <th className="text-left py-3 px-4">Продукт</th>
+                                        <th className="text-left py-3 px-4">Конкуренты</th>
+                                        <th className="text-left py-3 px-4">Средняя цена</th>
+                                        <th className="text-left py-3 px-4">Наша цена</th>
+                                        <th className="text-left py-3 px-4">Преимущество</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {products.map((product, index) => (
+                                        <tr key={index} className="border-b border-slate-100">
+                                            <td className="py-4 px-4">
+                                                <div>{product.name}</div>
+                                                {product.status === 'unique' && <span className="inline-block mt-1 px-2 py-0.5 bg-purple-100 text-purple-700 rounded text-xs">Уникально</span>}
+                                                {product.status === 'premium' && <span className="inline-block mt-1 px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">Премиум</span>}
+                                            </td>
+                                            <td className="py-4 px-4 text-slate-600">{product.competitors}</td>
+                                            <td className="py-4 px-4">{product.average}</td>
+                                            <td className="py-4 px-4 font-semibold">{product.ourPrice}</td>
+                                            <td className="py-4 px-4 text-sm text-slate-600">{product.note}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Product Range
+        function ProductRange() {
+            const products = [
+                { name: 'GoPro Hero 12', price: 24290, quantity: 10, total: 242900 },
+                { name: 'Ray-Ban Meta', price: 26500, quantity: 5, total: 132500 },
+                { name: 'JBL колонки', price: 8000, quantity: 5, total: 40000 },
+                { name: 'SUP-борд (комплект)', price: 9000, quantity: 5, total: 45000 }
+            ];
+            const totalPurchase = 460400;
+
+            return (
+                <section className="py-16 px-6">
+                    <div className="max-w-6xl mx-auto">
+                        <h2 className="text-center mb-12">Ассортимент и закупка</h2>
+                        
+                        <div className="bg-white rounded-2xl shadow-lg p-8">
+                            <h3 className="text-xl mb-6">Закупочный план</h3>
+                            
+                            <div className="overflow-x-auto mb-6">
+                                <table className="w-full">
+                                    <thead>
+                                        <tr className="border-b-2 border-slate-200">
+                                            <th className="text-left py-3 px-4">Позиция</th>
+                                            <th className="text-right py-3 px-4">Цена, ₽</th>
+                                            <th className="text-center py-3 px-4">Количество</th>
+                                            <th className="text-right py-3 px-4">Итого, ₽</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {products.map((product, index) => (
+                                            <tr key={index} className="border-b border-slate-100">
+                                                <td className="py-4 px-4">{product.name}</td>
+                                                <td className="py-4 px-4 text-right">{product.price.toLocaleString()}</td>
+                                                <td className="py-4 px-4 text-center">{product.quantity}</td>
+                                                <td className="py-4 px-4 text-right">{product.total.toLocaleString()}</td>
+                                            </tr>
+                                        ))}
+                                        <tr className="border-t-2 border-slate-300">
+                                            <td className="py-4 px-4 font-semibold" colSpan={3}>Итого закупка</td>
+                                            <td className="py-4 px-4 text-right font-semibold text-lg">{totalPurchase.toLocaleString()} ₽</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div className="bg-slate-50 rounded-lg p-6 mt-6">
+                                <h4 className="mb-4">Дополнительные стартовые расходы</h4>
+                                <div className="grid md:grid-cols-3 gap-4">
+                                    <div className="bg-white rounded-lg p-4">
+                                        <div className="text-sm text-slate-600 mb-1">Реклама</div>
+                                        <div className="text-xl">30 000 ₽</div>
+                                    </div>
+                                    <div className="bg-white rounded-lg p-4">
+                                        <div className="text-sm text-slate-600 mb-1">Аксессуары</div>
+                                        <div className="text-xl">10 000 ₽</div>
+                                    </div>
+                                    <div className="bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-lg p-4">
+                                        <div className="text-sm text-blue-100 mb-1">Итого инвестиции</div>
+                                        <div className="text-2xl">500 400 ₽</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Financial Model
+        function FinancialModel() {
+            const monthlyData = [
+                { month: 'Фев 26', revenue: 246000, expenses: 120000, profit: 126000, cumulative: 126000 },
+                { month: 'Мар 26', revenue: 484500, expenses: 180000, profit: 304500, cumulative: 430500 },
+                { month: 'Апр 26', revenue: 484500, expenses: 180000, profit: 304500, cumulative: 735000 },
+                { month: 'Май 26', revenue: 484500, expenses: 180000, profit: 304500, cumulative: 1039500 },
+                { month: 'Июн 26', revenue: 290000, expenses: 150000, profit: 140000, cumulative: 1179500 },
+                { month: 'Июл 26', revenue: 40000, expenses: 25000, profit: 15000, cumulative: 1194500 },
+                { month: 'Авг 26', revenue: 40000, expenses: 25000, profit: 15000, cumulative: 1209500 },
+                { month: 'Сен 26', revenue: 40000, expenses: 25000, profit: 15000, cumulative: 1224500 }
+            ];
+
+            const expenses = [
+                { name: 'Налоги УСН 4%', amount: 'с учётом вычетов' },
+                { name: 'Фиксированные взносы', amount: '52 798 ₽' },
+                { name: 'Доп. 1% свыше 300к', amount: '19 760 ₽' },
+                { name: 'Аренда точки (5 мес)', amount: '275 000 ₽' },
+                { name: 'Промоутеры', amount: '150 000 ₽' },
+                { name: 'Доставка', amount: '50 000 ₽' },
+                { name: 'Реклама', amount: '50 000 ₽' },
+                { name: 'Страхование', amount: '30 000 ₽' },
+                { name: 'Расходники', amount: '40 000 ₽' }
+            ];
+
+            return (
+                <section className="py-16 px-6 bg-white">
+                    <div className="max-w-6xl mx-auto">
+                        <h2 className="text-center mb-12">Финансовая модель</h2>
+                        
+                        <div className="grid md:grid-cols-4 gap-4 mb-12">
+                            <div className="bg-gradient-to-br from-green-500 to-emerald-500 text-white rounded-xl p-6">
+                                <div className="text-sm opacity-90 mb-2">Пик выручки/мес</div>
+                                <div className="text-3xl">484 500 ₽</div>
+                                <div className="text-xs opacity-75 mt-1">Март–Май</div>
+                            </div>
+                            <div className="bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-xl p-6">
+                                <div className="text-sm opacity-90 mb-2">Выручка/год</div>
+                                <div className="text-3xl">2.3М ₽</div>
+                                <div className="text-xs opacity-75 mt-1">Весь год</div>
+                            </div>
+                            <div className="bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-xl p-6">
+                                <div className="text-sm opacity-90 mb-2">Расходы/год</div>
+                                <div className="text-3xl">759К ₽</div>
+                                <div className="text-xs opacity-75 mt-1">Всего</div>
+                            </div>
+                            <div className="bg-gradient-to-br from-orange-500 to-red-500 text-white rounded-xl p-6">
+                                <div className="text-sm opacity-90 mb-2">Чистая прибыль</div>
+                                <div className="text-3xl">1.5М ₽</div>
+                                <div className="text-xs opacity-75 mt-1">За год</div>
+                            </div>
+                        </div>
+
+                        <div className="bg-slate-50 rounded-2xl p-8 mb-8">
+                            <h3 className="text-xl mb-6">Выручка и прибыль по месяцам</h3>
+                            <div className="bg-blue-50 rounded-lg p-4 mb-4 border border-blue-200">
+                                <div className="grid md:grid-cols-3 gap-4 text-sm">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-4 h-4 bg-blue-500 rounded"></div>
+                                        <div><div>Выручка</div><div className="text-xs text-slate-600">Общий доход от аренды</div></div>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-4 h-4 bg-slate-400 rounded"></div>
+                                        <div><div>Расходы</div><div className="text-xs text-slate-600">Все операционные затраты</div></div>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-4 h-4 bg-green-500 rounded"></div>
+                                        <div><div>Прибыль</div><div className="text-xs text-slate-600">Выручка минус расходы</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ResponsiveContainer width="100%" height={400}>
+                                <BarChart data={monthlyData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="month" />
+                                    <YAxis />
+                                    <Tooltip formatter={(value) => `${Number(value).toLocaleString()} ₽`} />
+                                    <Legend />
+                                    <Bar dataKey="revenue" fill="#3b82f6" name="Выручка" />
+                                    <Bar dataKey="expenses" fill="#94a3b8" name="Расходы" />
+                                    <Bar dataKey="profit" fill="#10b981" name="Прибыль" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+
+                        <div className="bg-slate-50 rounded-2xl p-8 mb-8">
+                            <h3 className="text-xl mb-6">Накопительная прибыль (окупаемость)</h3>
+                            <ResponsiveContainer width="100%" height={300}>
+                                <LineChart data={monthlyData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="month" />
+                                    <YAxis />
+                                    <Tooltip formatter={(value) => `${Number(value).toLocaleString()} ₽`} />
+                                    <Legend />
+                                    <Line type="monotone" dataKey="cumulative" stroke="#8b5cf6" strokeWidth={3} name="Накопительная прибыль" />
+                                </LineChart>
+                            </ResponsiveContainer>
+                            <div className="mt-4 bg-purple-100 rounded-lg p-4 text-center">
+                                <div className="text-sm text-purple-700 mb-1">Точка безубыточности</div>
+                                <div className="text-2xl text-purple-900">~4 месяца</div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-2xl shadow-lg p-8">
+                            <h3 className="text-xl mb-6">Структура расходов за год</h3>
+                            <div className="grid md:grid-cols-2 gap-4">
+                                {expenses.map((expense, index) => (
+                                    <div key={index} className="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                                        <div className="text-slate-700">{expense.name}</div>
+                                        <div>{expense.amount}</div>
+                                    </div>
+                                ))}
+                                <div className="md:col-span-2 flex justify-between items-center p-4 bg-gradient-to-r from-slate-700 to-slate-600 text-white rounded-lg">
+                                    <div>Итого расходов</div>
+                                    <div className="text-xl">758 598 ₽</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Operations
+        function Operations() {
+            return (
+                <section className="py-16 px-6">
+                    <div className="max-w-6xl mx-auto">
+                        <h2 className="text-center mb-12">Операционная модель</h2>
+                        
+                        <div className="grid md:grid-cols-2 gap-6 mb-8">
+                            <div className="bg-white rounded-xl shadow-lg p-6">
+                                <h3 className="text-xl mb-4">Юридическая структура</h3>
+                                <div className="space-y-3">
+                                    <div className="flex items-start gap-2">
+                                        <span className="text-green-600">✓</span>
+                                        <div><div>ИП</div><div className="text-sm text-slate-600">Индивидуальный предприниматель</div></div>
+                                    </div>
+                                    <div className="flex items-start gap-2">
+                                        <span className="text-green-600">✓</span>
+                                        <div><div>УСН «Доходы» 4%</div><div className="text-sm text-slate-600">Упрощённая система налогообложения</div></div>
+                                    </div>
+                                    <div className="flex items-start gap-2">
+                                        <span className="text-green-600">✓</span>
+                                        <div><div>Расчётный счёт в банке</div><div className="text-sm text-slate-600">Для безналичных расчётов</div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-white rounded-xl shadow-lg p-6">
+                                <h3 className="text-xl mb-4">Логистика</h3>
+                                <div className="space-y-4">
+                                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                        <div className="mb-2">Вариант А: Февраль–Июнь</div>
+                                        <ul className="text-sm text-slate-700 space-y-1">
+                                            <li>• Домашний склад</li>
+                                            <li>• Курьер / самовывоз</li>
+                                            <li>• Минимальные затраты</li>
+                                        </ul>
+                                    </div>
+                                    <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                                        <div className="mb-2">Вариант Б: С июля</div>
+                                        <ul className="text-sm text-slate-700 space-y-1">
+                                            <li>• Точка на набережной</li>
+                                            <li>• Аренда ~55 000 ₽/мес</li>
+                                            <li>• При подтверждённом спросе</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8 mb-8">
+                            <h3 className="text-xl mb-6">Процесс аренды</h3>
+                            <div className="grid md:grid-cols-5 gap-4">
+                                <div className="bg-white rounded-lg p-4 text-center">
+                                    <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3">1</div>
+                                    <div className="text-sm">Онлайн-бронь</div>
+                                </div>
+                                <div className="bg-white rounded-lg p-4 text-center">
+                                    <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3">2</div>
+                                    <div className="text-sm">Предоплата 50% + залог</div>
+                                </div>
+                                <div className="bg-white rounded-lg p-4 text-center">
+                                    <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3">3</div>
+                                    <div className="text-sm">Доставка / самовывоз</div>
+                                </div>
+                                <div className="bg-white rounded-lg p-4 text-center">
+                                    <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3">4</div>
+                                    <div className="text-sm">Использование</div>
+                                </div>
+                                <div className="bg-white rounded-lg p-4 text-center">
+                                    <div className="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center mx-auto mb-3">5</div>
+                                    <div className="text-sm">Проверка + возврат залога</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-xl shadow-lg p-8">
+                            <h3 className="text-xl mb-6">Маркетинг и продвижение</h3>
+                            <div className="grid md:grid-cols-3 gap-6">
+                                <div>
+                                    <div className="mb-3">Онлайн-каналы</div>
+                                    <ul className="space-y-2 text-sm text-slate-700">
+                                        <li>• Авито</li>
+                                        <li>• Таргет VK</li>
+                                        <li>• Таргет Telegram</li>
+                                        <li>• SEO-оптимизация</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <div className="mb-3">Оффлайн</div>
+                                    <ul className="space-y-2 text-sm text-slate-700">
+                                        <li>• Промоутеры на набережной</li>
+                                        <li>• Флаеры и листовки</li>
+                                        <li>• Точка на пляже</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <div className="mb-3">Партнёрства</div>
+                                    <ul className="space-y-2 text-sm text-slate-700">
+                                        <li>• Отели (комиссия 10%)</li>
+                                        <li>• Пляжи</li>
+                                        <li>• Турагентства</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Risks
+        function Risks() {
+            const risks = [
+                { name: 'Поломка/кража оборудования', level: 'high', mitigation: 'Залог ≈ полной стоимости + страхование оборудования' },
+                { name: 'Сезонность спроса', level: 'high', mitigation: 'Перенос в СПб на следующий сезон, частичная распродажа' },
+                { name: 'Конкуренция GoPro', level: 'medium', mitigation: 'Акцент на Ray-Ban Meta (уникальность) + премиум-сервис' },
+                { name: 'Логистические проблемы', level: 'medium', mitigation: 'Договор с курьерской службой, резервный автомобиль' }
+            ];
+
+            return (
+                <section className="py-16 px-6 bg-white">
+                    <div className="max-w-6xl mx-auto">
+                        <h2 className="text-center mb-12">Риски и митигация</h2>
+                        
+                        <div className="grid gap-6">
+                            {risks.map((risk, index) => (
+                                <div key={index} className="bg-white rounded-xl shadow-lg p-6 border border-slate-200">
+                                    <div className="flex flex-col md:flex-row md:items-center gap-4">
+                                        <div className="flex-1">
+                                            <h3 className="text-lg mb-2">{risk.name}</h3>
+                                            <span className={`inline-block px-3 py-1 rounded-full text-sm ${
+                                                risk.level === 'high' ? 'bg-red-100 text-red-700 border border-red-200' : 'bg-yellow-100 text-yellow-700 border border-yellow-200'
+                                            }`}>
+                                                Уровень: {risk.level === 'high' ? 'Высокий' : 'Средний'}
+                                            </span>
+                                        </div>
+                                        <div className="flex-1 bg-green-50 rounded-lg p-4 border border-green-200">
+                                            <div className="text-sm text-green-900 mb-1">Митигация:</div>
+                                            <div className="text-sm text-slate-700">{risk.mitigation}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="mt-8 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-200">
+                            <h3 className="text-lg mb-3">Ключевые меры безопасности</h3>
+                            <ul className="space-y-2 text-sm text-slate-700">
+                                <li>• Обязательный залог при аренде, равный стоимости оборудования</li>
+                                <li>• Страхование всего оборудования от повреждений и кражи</li>
+                                <li>• Договоры с клиентами с чёткими условиями ответственности</li>
+                                <li>• Диверсификация рисков через разные категории товаров</li>
+                                <li>• Резервный фонд на непредвиденные расходы</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Scaling
+        function Scaling() {
+            return (
+                <section className="py-16 px-6">
+                    <div className="max-w-6xl mx-auto">
+                        <h2 className="text-center mb-12">Масштабирование в Санкт-Петербург</h2>
+                        
+                        <div className="grid md:grid-cols-2 gap-8 mb-8">
+                            <div className="bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-2xl p-8">
+                                <h3 className="text-2xl mb-4">План экспансии</h3>
+                                <div className="space-y-3">
+                                    <div className="flex items-start gap-2">
+                                        <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center flex-shrink-0 mt-0.5">✓</div>
+                                        <div><div>Сентябрь 2026</div><div className="text-sm opacity-90">Переезд в Санкт-Петербург</div></div>
+                                    </div>
+                                    <div className="flex items-start gap-2">
+                                        <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center flex-shrink-0 mt-0.5">✓</div>
+                                        <div><div>Точка в туристическом районе</div><div className="text-sm opacity-90">Невский проспект / Васильевский остров</div></div>
+                                    </div>
+                                    <div className="flex items-start gap-2">
+                                        <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center flex-shrink-0 mt-0.5">✓</div>
+                                        <div><div>Расширение ассортимента</div><div className="text-sm opacity-90">Новые категории продуктов</div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-white rounded-2xl shadow-lg p-8">
+                                <h3 className="text-2xl mb-4">Новый ассортимент</h3>
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div className="bg-blue-50 rounded-lg p-3 text-center"><div className="text-sm">🎮 Дроны</div></div>
+                                    <div className="bg-blue-50 rounded-lg p-3 text-center"><div className="text-sm">📱 Стабилизаторы</div></div>
+                                    <div className="bg-blue-50 rounded-lg p-3 text-center"><div className="text-sm">⛺ Палатки</div></div>
+                                    <div className="bg-blue-50 rounded-lg p-3 text-center"><div className="text-sm">🚴 Велосипеды</div></div>
+                                    <div className="bg-blue-50 rounded-lg p-3 text-center"><div className="text-sm">🎧 Аудио-гиды</div></div>
+                                    <div className="bg-blue-50 rounded-lg p-3 text-center"><div className="text-sm">📷 Объективы</div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-br from-slate-800 to-slate-700 text-white rounded-2xl p-8">
+                            <h3 className="text-2xl mb-6">Прогноз по Санкт-Петербургу</h3>
+                            <div className="grid md:grid-cols-4 gap-4 mb-6">
+                                <div className="bg-white/10 backdrop-blur rounded-lg p-4">
+                                    <div className="text-sm opacity-75 mb-1">Выручка/мес</div>
+                                    <div className="text-2xl">400-500К ₽</div>
+                                </div>
+                                <div className="bg-white/10 backdrop-blur rounded-lg p-4">
+                                    <div className="text-sm opacity-75 mb-1">Выручка/год</div>
+                                    <div className="text-2xl">5-6М ₽</div>
+                                </div>
+                                <div className="bg-white/10 backdrop-blur rounded-lg p-4">
+                                    <div className="text-sm opacity-75 mb-1">Прибыль/год</div>
+                                    <div className="text-2xl">2-3М ₽</div>
+                                </div>
+                                <div className="bg-white/10 backdrop-blur rounded-lg p-4">
+                                    <div className="text-sm opacity-75 mb-1">Сезонность</div>
+                                    <div className="text-2xl">Круглый год</div>
+                                </div>
+                            </div>
+                            <div className="pt-6 border-t border-white/20">
+                                <h4 className="mb-3">Преимущества СПб</h4>
+                                <div className="grid md:grid-cols-3 gap-3 text-sm">
+                                    <div>• Круглогодичный туристический поток</div>
+                                    <div>• Больший средний чек</div>
+                                    <div>• Развитая инфраструктура</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Conclusions
+        function Conclusions() {
+            return (
+                <section className="py-16 px-6 bg-gradient-to-br from-slate-800 to-slate-900 text-white">
+                    <div className="max-w-6xl mx-auto">
+                        <h2 className="text-center mb-12">Выводы</h2>
+                        
+                        <div className="grid md:grid-cols-2 gap-8 mb-12">
+                            <div className="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+                                <h3 className="text-2xl mb-6">Ключевые преимущества</h3>
+                                <div className="space-y-3">
+                                    <div className="flex items-start gap-3"><span className="text-green-400">✓</span><span>Быстрая окупаемость (~4 месяца)</span></div>
+                                    <div className="flex items-start gap-3"><span className="text-green-400">✓</span><span>Высокая маржинальность</span></div>
+                                    <div className="flex items-start gap-3"><span className="text-green-400">✓</span><span>Уникальный продукт на рынке (Ray-Ban Meta)</span></div>
+                                    <div className="flex items-start gap-3"><span className="text-green-400">✓</span><span>Премиум-позиционирование</span></div>
+                                    <div className="flex items-start gap-3"><span className="text-green-400">✓</span><span>Потенциал масштабирования</span></div>
+                                </div>
+                            </div>
+
+                            <div className="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl p-8">
+                                <h3 className="text-2xl mb-6">План действий</h3>
+                                <div className="space-y-3">
+                                    <div className="flex items-start gap-3"><div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 text-sm">1</div><span>Старт с домашнего склада — февраль 2026</span></div>
+                                    <div className="flex items-start gap-3"><div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 text-sm">2</div><span>A/B-тест цен и ассортимента</span></div>
+                                    <div className="flex items-start gap-3"><div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 text-sm">3</div><span>Открытие точки с июля при подтверждённом спросе</span></div>
+                                    <div className="flex items-start gap-3"><div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 text-sm">4</div><span>Обязательные залоги и страхование</span></div>
+                                    <div className="flex items-start gap-3"><div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 text-sm">5</div><span>Подготовка к масштабированию в СПб с августа</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl p-8 text-center">
+                            <div className="text-5xl mb-4">✓</div>
+                            <h3 className="text-3xl mb-4">Бизнес готов к запуску</h3>
+                            <p className="text-lg text-green-100 mb-6">Все компоненты проработаны, риски учтены, финансовая модель просчитана</p>
+                            <div className="flex flex-wrap items-center justify-center gap-2 text-xl">
+                                <span>Ожидаемая прибыль в первый год:</span>
+                                <span className="px-4 py-2 bg-white text-green-600 rounded-lg font-semibold">1 517 402 ₽</span>
+                            </div>
+                        </div>
+
+                        <div className="mt-12 text-center text-slate-400 text-sm">
+                            <p>Aura Rent © 2026 • Бизнес-план разработан для запуска в феврале 2026</p>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Main App
+        function App() {
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 relative overflow-hidden">
+                    <div className="fixed left-4 top-1/4 text-slate-200 opacity-30 text-xs tracking-widest rotate-[-90deg] select-none pointer-events-none z-0">AURA</div>
+                    <div className="fixed right-4 top-1/3 text-slate-200 opacity-30 text-xs tracking-widest rotate-90 select-none pointer-events-none z-0">AURA</div>
+                    <div className="fixed left-4 bottom-1/4 text-slate-200 opacity-30 text-xs tracking-widest rotate-[-90deg] select-none pointer-events-none z-0">AURA</div>
+                    <div className="fixed right-4 bottom-1/3 text-slate-200 opacity-30 text-xs tracking-widest rotate-90 select-none pointer-events-none z-0">AURA</div>
+                    
+                    <div className="relative z-10">
+                        <Hero />
+                        <ExecutiveSummary />
+                        <MarketAnalysis />
+                        <ProductRange />
+                        <FinancialModel />
+                        <Operations />
+                        <Risks />
+                        <Scaling />
+                        <Conclusions />
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
